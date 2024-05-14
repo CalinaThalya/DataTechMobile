@@ -2,24 +2,26 @@ const express = require("express");
 const cors = require("cors");
 const api = express();
 const jwt = require("jsonwebtoken");
+const fs = require("fs");
 const lista = [];
 api.use(express.json());
 api.use(cors());
 
 const CHAVE_SECRETA = process.env["CHAVE_SECRETA"];
 
-const listaUsuarios = {
-  joao: { senha: "1234", perfil: "user" },
-  antonio: { senha: "1234", perfil: "admin" },
+// Função para ler os usuários do arquivo db.json
+const lerUsuarios = () => {
+  const data = fs.readFileSync("db.json");
+  return JSON.parse(data).users;
 };
+
+// Lista de usuários do arquivo db.json
+let listaUsuarios = lerUsuarios();
 
 const autentica = (request, response, next) => {
   if (request.headers.authorization) {
     const auth = request.headers.authorization;
-    // Bearer salkjhfakjshfkjsahfk
     const listaAuth = auth.split(" ");
-    //    0              1
-    // ['Bearer', 'salkjhfakjshfkjsahfk']
     const token = listaAuth[1];
     console.log("Token recebido: " + token);
     if (token) {
@@ -47,22 +49,19 @@ const autentica = (request, response, next) => {
 };
 
 api.post("/login", (request, response) => {
-  if (request.body.usuario in listaUsuarios) {
-    const obj = listaUsuarios[request.body.usuario];
-    if (request.body.senha == obj.senha) {
-      const payload = {
-        usuario: request.body.usuario,
-        perfil: obj.perfil,
-        geradoEm: "2024-05-09-20-03-40",
-      };
-      const token = jwt.sign(payload, CHAVE_SECRETA);
-      console.log("Token: " + token);
-      response.status(200).send({ msg: "Usuario Autenticado", token });
-    } else {
-      response.status(401).send("Senha inválida");
-    }
+  const { email, senha } = request.body;
+  const usuario = listaUsuarios.find(u => u.email === email && u.senha === senha);
+  if (usuario) {
+    const payload = {
+      usuario: usuario.email,
+      perfil: "user", // Defina o perfil conforme necessário
+      geradoEm: new Date(),
+    };
+    const token = jwt.sign(payload, CHAVE_SECRETA);
+    console.log("Token: " + token);
+    response.status(200).send({ msg: "Usuario Autenticado", token });
   } else {
-    response.status(401).send("Usuario inválido");
+    response.status(401).send("Usuário ou senha inválidos");
   }
 });
 
@@ -84,6 +83,6 @@ api.get("/", (request, response) => {
   response.send("Bem vindo ao sistema de Agenda de Contatos em NodeJS");
 });
 
-api.listen(80, () => {
+api.listen(3001, () => {
   console.log("Servidor iniciado");
 });

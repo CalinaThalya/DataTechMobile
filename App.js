@@ -5,6 +5,7 @@ import { ImageBackground } from 'react-native';
 import Cadastro from './components/Cadastro';
 import Comparacoes from './components/Comparacoes'; 
 import Login from './components/Login'; 
+import EsqueceuSenha from './components/EsqueceuSenha'; // Importe a tela EsqueceuSenha
 
 const Stack = createStackNavigator();
 
@@ -25,17 +26,22 @@ const App = () => {
             ),
           }}
         />
-         <Stack.Screen
+        <Stack.Screen
           name="Cadastro"
           component={Cadastro} 
           options={{ title: 'Cadastro' }} 
         />
-          <Stack.Screen
+        <Stack.Screen
           name="Comparacoes"
           component={Comparacoes}
           options={{
             headerTitle: null,
           }}
+        />
+        <Stack.Screen
+          name="EsqueceuSenha" // Defina o nome da tela
+          component={EsqueceuSenha} // Especifica o componente a ser renderizado
+          options={{ title: 'Esqueceu sua senha' }} // Opções de navegação
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, TouchableOpacity } from 'react-native';
-
-import { Linking } from 'react-native';
+import { View, Text, TextInput, Button, TouchableOpacity, Linking } from 'react-native';
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -17,6 +15,10 @@ const Login = ({ navigation }) => {
 
   const irParaCadastro = () => {
     navigation.navigate('Cadastro');
+  };
+
+  const irParaEsqueceuSenha = () => { // Função para navegar para a tela EsqueceuSenha
+    navigation.navigate('EsqueceuSenha');
   };
 
   return (
@@ -38,7 +40,7 @@ const Login = ({ navigation }) => {
         secureTextEntry={true}
         style={{ height: 50, borderColor: '#FA1616', borderRadius: 15, borderWidth: 1, marginBottom: 10, backgroundColor: '#F0F0F0' }}      
       />
-      <TouchableOpacity>
+      <TouchableOpacity onPress={irParaEsqueceuSenha}> {/* Botão para ir para a tela de esqueceu a senha */}
         <Text style={{fontWeight: 'bold', fontSize: 12, color:"gray",alignSelf: 'flex-end', marginBottom: 50}}>Esqueceu sua senha?</Text>
       </TouchableOpacity>
       <Button
