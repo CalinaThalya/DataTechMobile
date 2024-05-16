@@ -39,9 +39,9 @@ const App = () => {
           }}
         />
         <Stack.Screen
-          name="EsqueceuSenha" // Defina o nome da tela
-          component={EsqueceuSenha} // Especifica o componente a ser renderizado
-          options={{ title: 'Esqueceu sua senha' }} // Opções de navegação
+          name="EsqueceuSenha" 
+          component={EsqueceuSenha}
+          options={{ title: 'Esqueceu sua senha' }} 
         />
       </Stack.Navigator>
     </NavigationContainer>
