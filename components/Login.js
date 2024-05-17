@@ -18,7 +18,7 @@ const Login = ({ navigation }) => {
       const data = await response.json();
 
       if (response.ok) {
-        navigation.navigate('Comparacoes'); 
+        navigation.navigate('Home'); 
       } else {
         Alert.alert('Erro', data.message); 
       }

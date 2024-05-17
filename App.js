@@ -5,7 +5,8 @@ import { ImageBackground } from 'react-native';
 import Cadastro from './components/Cadastro';
 import Comparacoes from './components/Comparacoes'; 
 import Login from './components/Login'; 
-import EsqueceuSenha from './components/EsqueceuSenha'; // Importe a tela EsqueceuSenha
+import EsqueceuSenha from './components/EsqueceuSenha'; 
+import Home from './components/Home';
 
 const Stack = createStackNavigator();
 
@@ -25,7 +26,12 @@ const App = () => {
               />
             ),
           }}
-        />
+          />
+          <Stack.Screen
+          name="Home" 
+          component={Home}
+          options={{ title: 'Home' }} 
+          />
         <Stack.Screen
           name="Cadastro"
           component={Cadastro} 
