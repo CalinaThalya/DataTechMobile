@@ -21,7 +21,7 @@ const App = () => {
             headerTitle: null,
             headerRight: () => (
               <ImageBackground
-                source={require('./iconDataTech.png')}
+                source={require('./assets/iconDataTech.png')}
                 style={{ height: 45, width: 46, marginRight: 20 }}
               />
             ),
