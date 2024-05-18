@@ -13,7 +13,7 @@ const Home = ({ navigation }) => {
             style={styles.imageBackground}
           />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Empresas')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Comparacoes')}>
           <ImageBackground
             source={require('./assets/7247088.png')}
             style={styles.imageBackground}
